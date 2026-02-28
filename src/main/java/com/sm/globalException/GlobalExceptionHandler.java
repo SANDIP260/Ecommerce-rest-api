@@ -19,5 +19,11 @@ public class GlobalExceptionHandler {
 	{
 		return new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(StockException.class)
+	public ResponseEntity<String> handleStock(StockException ex)
+	{
+		return new ResponseEntity<String>(ex.getMessage(),HttpStatus.EXPECTATION_FAILED);
+	}
 
 }

@@ -71,6 +71,5 @@ public class ProductController {
 		String msg = prodService.deleteProduct(id);
 		return new ResponseEntity<String>(msg,HttpStatus.OK);
 	}
-	
 
 }

@@ -30,46 +30,43 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 
-    UserController(UserServiceImple userServiceImple) {
-        this.userService = userServiceImple;
-    }
 	
-	@PostMapping("/user")
+	@PostMapping
 	public ResponseEntity<String> createUser(@Valid @RequestBody UserDTO userdto)
 	{
 		String msg = userService.createUsers(userdto);
 		return new ResponseEntity<String>(msg,HttpStatus.OK);
 	}
 	
-	@GetMapping("/users")
+	@GetMapping
 	public ResponseEntity<List<User>> getAllUsers()
 	{
 		List<User> listOfUsers = userService.getallUsers();
 		return  new ResponseEntity<List<User>>(listOfUsers,HttpStatus.OK);
 	}
 	
-	@GetMapping("/user/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable Long id)
 	{
 		User user = userService.getUserById(id);
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	
-	@PutMapping("/user/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody UserDTO userdto)
 	{
 		String msg = userService.updateUser(id, userdto);
 		return new ResponseEntity<String>(msg,HttpStatus.OK);
 	}
 	
-	@PatchMapping("/user/{id}")
+	@PatchMapping("/{id}")
 	public ResponseEntity<String> updateUserPartialData(@PathVariable Long id, @RequestBody UserDTO userdto)
 	{
 		String msg = userService.updateUserPartialData(id, userdto);
 		return new ResponseEntity<String>(msg,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/user/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> updateUserPartialData(@PathVariable Long id)
 	{
 		String msg = userService.deleteUserById(id);

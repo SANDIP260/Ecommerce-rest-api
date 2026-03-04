@@ -26,28 +26,28 @@ public class OrdersController {
 	@Autowired
 	private IOrderService orderService;
 	
-	@PostMapping("/order")
+	@PostMapping
 	public ResponseEntity<Orders> placeOrder(@Valid @RequestBody OrderDTO dto)
 	{
 		Orders orders = orderService.placeOrder(dto);
 		return new ResponseEntity<Orders>(orders,HttpStatus.OK);
 	}
 	
-	@GetMapping("/order")
+	@GetMapping
 	public ResponseEntity<List<Orders>> getAllOrders()
 	{
 		List<Orders> allOrders = orderService.getAllOrders();
 		return new ResponseEntity<List<Orders>>(allOrders,HttpStatus.OK);
 	}
 	
-	@GetMapping("/order/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<List<Orders>> getAllOrdersByUserId(@PathVariable Long id)
 	{
 		List<Orders> allOrders = orderService.getAllOrdersByUserId(id);
 		return new ResponseEntity<List<Orders>>(allOrders,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/order/{orderId}")
+	@DeleteMapping("/{orderId}")
 	public ResponseEntity<String> cancelOrder(@PathVariable Long orderId)
 	{
 		String msg = orderService.cancelOrder(orderId);

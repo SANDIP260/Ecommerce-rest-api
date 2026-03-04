@@ -28,28 +28,28 @@ public class ProductController {
 	@Autowired
 	private IProductService prodService;
 	
-	@PostMapping("/product")
+	@PostMapping
 	public ResponseEntity<String> addProduct(@Valid @RequestBody ProductDTO  dto)
 	{
 		String msg = prodService.addProuduct(dto);
 		return new ResponseEntity<String>(msg,HttpStatus.OK);
 	}
 	
-	@GetMapping("/products")
+	@GetMapping
 	public ResponseEntity<List<Product>> getAllProducts()
 	{
 		List<Product> allProducts = prodService.getAllProducts();
 		return new ResponseEntity<List<Product>>(allProducts,HttpStatus.OK);
 	}
 	
-	@GetMapping("/product/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Product> getProductById(@PathVariable Long id)
 	{
 		Product product = prodService.getProductById(id);
 		return new ResponseEntity<Product>(product,HttpStatus.OK);
 	}
 	
-	@PutMapping("/product/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody ProductDTO dto)
 	{
 		
@@ -57,7 +57,7 @@ public class ProductController {
 		return new ResponseEntity<String>(msg,HttpStatus.OK);
 	}
 	
-	@PatchMapping("/product/{id}")
+	@PatchMapping("/{id}")
 	public ResponseEntity<String> partialProductUpdate(@PathVariable Long id, @RequestBody ProductDTO dto)
 	{
 		
@@ -65,7 +65,7 @@ public class ProductController {
 		return new ResponseEntity<String>(msg,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/product/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteProduct(@PathVariable Long id)
 	{
 		String msg = prodService.deleteProduct(id);

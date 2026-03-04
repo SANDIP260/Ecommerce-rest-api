@@ -3,7 +3,9 @@ package com.sm.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sm.dto.UserDTO;
@@ -18,6 +20,9 @@ public class UserServiceImple implements IUserService {
 
 	@Autowired
 	private IUserRepository userRepo;
+	
+	@Autowired
+	private BCryptPasswordEncoder pwdEncoder;
 
 	@Override
 	public String createUsers(UserDTO userdto) {
@@ -26,11 +31,15 @@ public class UserServiceImple implements IUserService {
 		.ifPresent(e -> {
 			throw new DuplicateResourceException("Email is already present");
 		});
-
+		
+		// password encoder
+		@Nullable
+		String encode = pwdEncoder.encode(userdto.getPassword());
+		
 		  User user = new User();
 		  user.setName(userdto.getName());
 		  user.setEmail(userdto.getEmail());
-		  user.setPassword(userdto.getPassword());
+		  user.setPassword(encode);
 		  
 		  userRepo.save(user);
 
